@@ -14,9 +14,14 @@ This module will rely on the following input:
 
 **Output:**
 The outputs are Dataframes to be used by our DataScience functions (should be both a Python Library function API, and an OData API: see https://github.com/SAP/python-pyodata)
- - DF_RUN - a Dataframe that has Rows for Serial number of parts, and Columns as sensor readings one-sensor feature a column (i.e. used by RCA)
- - DF_TimeSeries - a Dataframe that has time-slice as rows, filled with "last-known-good-value", and Columns as sensor readings one-sensor feature a column (Serial number of parts are ignored) (i.e. used by Single V drift)
- - DF_History (full info across the cube that is not filled with "last-known-good-value"
+
+- DF_Run - a Dataframe that has Rows for Serial number of parts, and Columns as sensor readings one-sensor feature a column (i.e. used by RCA). This dataframe contains information about "what happened for a particular part across different sensors before it reaches a target station". (In the future, we will introduce more detailed Line configuration, so that which sensor should be ahead of which other sensor is configured, and those info can be used to create more detailed RUN info. i.e. we will be able to produce RUN for a sub section of the line instead of the full line, which we won't be able to do until we have the line configuration info.)
+
+- DF_TimeSeries - a Dataframe that has time-slice as rows and columns as sensor readings one-sensor feature a column, filtered by min/max values. Part number and Serial number of parts are included as metadata (i.e. used by Single V drift).
+
+- DF_History_Detail - This the a subset of the CUBE with all the features as columns, and all the values filtered with certain criteria (i.e. min/max limit) 
+
+- DF_Path - a dataframe that has Rows for Serial number of parts and Columns as sensor readings. This one is different from DF_Run in the sense that it does not have fixed # of columns while DF_Run has fixed # of columns. Each part only have one PATH even if it has been re-processed several times. Each path includes concatenation of all runs. (It is also easier to think about the differences between RUN and PATH and how they can be used together once we have the line-configuration info: the RUN would tells us sensor readings at each stage of the processing (sequentially according to how a part pass through each stage of processing), and PATH will tell us more info like which particular station actually carried out the operation of each stage, this additional info will give us more insights into difference between parallel stations, or impact of re-processing at some stages.)
 
 <pre>
 Sample Cube 
