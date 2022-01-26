@@ -40,9 +40,9 @@ steps:
   displayName: 'Get Latest Develop Branch'
 
 - task: CopyFiles@2
-  displayName: 'Copy Files to:  $(build.artifactstagingdirectory)'
+  displayName: 'Copy Files to:  $(Build.Repository.LocalPath)'
   inputs:
-    SourceFolder: '$(workingDirectory)'
+    SourceFolder: '$(Build.Repository.LocalPath)'
     TargetFolder: ' $(build.artifactstagingdirectory)'
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: DatabricksArtifacts'
