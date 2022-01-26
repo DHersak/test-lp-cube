@@ -34,4 +34,15 @@ steps:
 
 - script: git checkout develop
   displayName: 'Get Latest Develop Branch'
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to:  $(build.artifactstagingdirectory)'
+  inputs:
+    SourceFolder: '$(workingDirectory)'
+    TargetFolder: ' $(build.artifactstagingdirectory)'
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: DatabricksArtifacts'
+  inputs:
+    ArtifactName: LP-Cube-Artifacts
+
   
