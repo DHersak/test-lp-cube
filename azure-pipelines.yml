@@ -26,17 +26,6 @@ steps:
     pip install flake8  pytest-cov
   displayName: 'Load Python Dependencies'
 
-# Use environment variables to pass Databricks login information to the Databricks Connect
-# configuration function
-- script: |
-    echo "y
-    $(WORKSPACE-REGION-URL)
-    $(CSE-DEVELOP-PAT)
-    $(EXISTING-CLUSTER-ID)
-    $(WORKSPACE-ORG-ID)
-    15001" | databricks-connect configure
-  displayName: 'Configure DBConnect'
-
 # get the code
 
 - checkout: self
