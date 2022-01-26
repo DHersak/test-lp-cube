@@ -25,7 +25,7 @@ steps:
     pip install pytest requests setuptools wheel
     pip install flake8  pytest-cov
     pip install -U databricks-connect==6.4.*
-    displayName: 'Load Python Dependencies'
+  displayName: 'Load Python Dependencies'
 
 # Use environment variables to pass Databricks login information to the Databricks Connect
 # configuration function
