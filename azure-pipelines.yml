@@ -6,6 +6,10 @@
   # Specify the trigger event to start the build pipeline.
 # In this case, new code merged into the develop branch initiates a new build.
 
+variables:
+  workingDirectory: '$(System.DefaultWorkingDirectory)/Artifacts'
+  pythonVersion: 3.7
+
 trigger:
 - develop
 
